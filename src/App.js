@@ -4,8 +4,8 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import BeaniesPage from './BeaniesPage';
-import BeanieDetail from './BeanieDetail';
+//import BeaniesPage from './BeaniesPage';
+//import BeanieDetail from './BeanieDetail';
 
 export default function App() {
   return (

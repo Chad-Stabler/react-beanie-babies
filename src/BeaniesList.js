@@ -1,6 +1,6 @@
-import BeanieBaby from './BeanieBaby.js';
+//import BeanieBaby from './BeanieBaby.js';
 
-export default function BeaniesList({ beanieBabies }) {
+export default function BeaniesList() {
   return (
     <div className='beanies'>
       {/* render out the beanie babies as a list */}
