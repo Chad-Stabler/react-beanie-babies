@@ -1,15 +1,22 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getSingleBeanie } from './services/fetch-utils';
 
 export default function BeanieDetail() {
   // you'll need to track the current beanieBaby in state
   // you'll need to get the route param using the appropriate react router hook
+  const params = useParams();
+  const [beanie, setBeanie] = useState({});
 
   useEffect(() => {
-    // you'll need to define a fetch function here (then call it below) that gets this page's beanie baby and injects it into state using the correct state handler
+    async function fetch() {
+      const data = await getSingleBeanie(params.id);
 
-  }, []); // note that you'll want the id from the url in the dependency array because you want the useEffect callback to get called every time the url changes 
+      setBeanie(data);
+    }
+    // you'll need to define a fetch function here (then call it below) that gets this page's beanie baby and injects it into state using the correct state handler
+    fetch();
+  }, [params.id]); // note that you'll want the id from the url in the dependency array because you want the useEffect callback to get called every time the url changes 
 
   function handleBeanieClick() {
     // here's a challenge. How can you link on click to the beanie baby's correct entry in the official beanie baby fan site?
@@ -19,26 +26,26 @@ export default function BeanieDetail() {
     <>
       {/* Feel free to uncomment and use the below code--but you'll need to figure out how to keep it from blowing up on load */}
       
-      {/* <Link to='/'>Home</Link>
+      <Link to='/'>Home</Link>
       <div className='beanie-detail' onClick={handleBeanieClick}>
         <div className='beanie-data'>
-          <p>{beanieBaby.animal}</p>
-          <p>{beanieBaby.title}</p>
-          <p>Zodiac: {beanieBaby.astroSign}</p>
-          <p> Born on {beanieBaby.birthday}</p>
-          <img className='beanie-img' src={beanieBaby.image}/>
-          <p>Color: {beanieBaby.color}</p>
-          <p>Release Date: {beanieBaby.releaseDate}</p>
-          <p>Retirement Date: {beanieBaby.retirementDate}</p>
+          <p>{beanie.animal}</p>
+          <p>{beanie.title}</p>
+          <p>Zodiac: {beanie.astroSign}</p>
+          <p> Born on {beanie.birthday}</p>
+          <img className='beanie-img' src={beanie.image}/>
+          <p>Color: {beanie.color}</p>
+          <p>Release Date: {beanie.releaseDate}</p>
+          <p>Retirement Date: {beanie.retirementDate}</p>
 
-          <p>Size: {beanieBaby.size}</p>
-          <p>Theme: {beanieBaby.theme}</p>
-          <p>Sub-Theme: {beanieBaby.subtheme}</p>
-          <p>Style Number: {beanieBaby.styleNumber}</p>
-          <p>Swing Tag Generation: {beanieBaby.swingTagGeneration}</p>
-          <p>Tush Tag Generation: {beanieBaby.tushTagGeneration}</p>
+          <p>Size: {beanie.size}</p>
+          <p>Theme: {beanie.theme}</p>
+          <p>Sub-Theme: {beanie.subtheme}</p>
+          <p>Style Number: {beanie.styleNumber}</p>
+          <p>Swing Tag Generation: {beanie.swingTagGeneration}</p>
+          <p>Tush Tag Generation: {beanie.tushTagGeneration}</p>
         </div>
-      </div>   */}
+      </div>  
     </>
   );
 }

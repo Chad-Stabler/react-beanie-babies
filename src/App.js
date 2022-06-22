@@ -21,7 +21,7 @@ export default function App() {
           <Route exact path="/">
             <BeaniesPage />
           </Route>
-          <Route exact path="/beanies/:id"> 
+          <Route exact path="/beanie/:id"> 
             <BeanieDetail />
           </Route>
         </Switch>
