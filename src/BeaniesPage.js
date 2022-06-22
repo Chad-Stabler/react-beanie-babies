@@ -1,38 +1,43 @@
-// import { useEffect, useState } from 'react';
-// import './App.css';
-// import { getBeanieBabies } from './services/fetch-utils';
-// import BeaniesList from './BeaniesList';
+import { useEffect, useState } from 'react';
+import './App.css';
+import { getBeanieBabies } from './services/fetch-utils';
+import BeaniesList from './BeaniesList';
 
-// function App() {
-//   const [beanieBabies, setBeanieBabies] = useState([]);
-//   const [page, setPage] = useState(1);
-//   const perPage = 40;
+function App() {
+  const [beanieBabies, setBeanieBabies] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalBeanies, setTotalBeanies] = useState(1);
+  const perPage = 40;
   
-//   useEffect(() => {
-//     async function fetch() {
-//       const from = page * perPage - perPage;
-//       const to = page * perPage;
-//       const beanies = await getBeanieBabies(from, to);
+  useEffect(() => {
+    async function fetch() {
+      const from = page * perPage - perPage;
+      const to = page * perPage;
+      const beanies = await getBeanieBabies(from, to);
 
-//       setBeanieBabies(beanies);
-//     }
+      setBeanieBabies(beanies);
+      setTotalBeanies(beanies.count);
+    }
 
-//     fetch();
-//   }, []); // what can you do with this array to trigger a fetch every time the page changes?
+    fetch();
+  }, [page]); // what can you do with this array to trigger a fetch every time the page changes?
 
-//   return (
-//     <>
-//       <h2>Current Page {page}</h2>
-//       <div className='buttons'>
-//         {/* on click, this button should decrement the page in state  */}
-//         {/* also, disable this button when you are on the first page */}
-//         <button>Previous Page</button>
-//         {/* on click, this button should increment the page in state  */}
-//         <button >Next Page</button>
-//       </div>
-//       {/* pass the beanie babies into the BeaniesList component */}
-//     </>
-//   );
-// }
+  const lastPage = Math.floor(totalBeanies / perPage);
 
-// export default App;
+  return (
+    <>
+      <h2>Current Page {page}</h2>
+      <div className='buttons'>
+        {/* on click, this button should decrement the page in state  */}
+        {/* also, disable this button when you are on the first page */}
+        <button disabled={page <= 1} onClick={() => setPage(page - 1)}>Previous Page</button>
+        {/* on click, this button should increment the page in state  */}
+        <button disabled={page >= lastPage} onClick={() => setPage(page + 1)}>Next Page</button>
+      </div>
+      {/* pass the beanie babies into the BeaniesList component */}
+      <BeaniesList beanieBabies={beanieBabies} />
+    </>
+  );
+}
+
+export default App;

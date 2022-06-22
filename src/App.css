@@ -54,3 +54,33 @@ body {
   margin: 10px;
   padding: 20px;
 }
+
+ul {
+  list-style: none;
+}
+
+.beanie img {
+  width: 100px;
+}
+
+.beanies {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.beanies ul {
+  width: 100%;
+}
+
+.beanie {
+  width: 30%;
+  border: 2px solid red;
+  margin: 3px;
+  border-radius: 2%;
+  padding: 3px;
+}
+
+a, .beanies div {
+  width: fit-content;
+}
