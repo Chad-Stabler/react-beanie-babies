@@ -3,7 +3,7 @@ import { client, checkError } from './client';
 export async function getBeanieBabies(from = 0, to = 30) {
   const response = await client
     .from('beanie_babies')
-    .select()
+    .select('*', { count: 'exact' })
     .range(from, to);
 
   return checkError(response);
